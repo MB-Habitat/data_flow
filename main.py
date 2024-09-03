@@ -3,7 +3,7 @@
 import os
 import pandas as pd
 
-root_folder_path = 'C:\\Users\\Mustapha Bouhsen\\OneDrive - Habitat\\DataPool\\'
+root_folder_path = 'C:\\Users\\Mustapha Bouhsen\\OneDrive - Habitat\\DataPool\\geospatial\\'
 
 extensions = ["csv", "tif", "shp", "geojson"]
 
