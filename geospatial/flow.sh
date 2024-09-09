@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Define your paths
-localFolder="C:/Users/Mustapha Bouhsen/OneDrive - Habitat/DataPool/geospatial/theme_coutry_region_subject_year_version/"
-blobContainer="https://habitatblob.blob.core.windows.net/database/raw/geospatial/theme_coutry_region_subject_year_version/?sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupyx&se=2025-08-31T03:09:17Z&st=2024-08-15T19:09:17Z&spr=https&sig=IIL1q3Se%2BZfKA1l96S%2B8%2FEmL7SncX7UmFI5anR2Axcg%3D"
-blobFilesList="https://habitatblob.blob.core.windows.net/database/files_list_to_process/geospatial/theme_coutry_region_subject_year_version/?sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupyx&se=2025-08-31T03:09:17Z&st=2024-08-15T19:09:17Z&spr=https&sig=IIL1q3Se%2BZfKA1l96S%2B8%2FEmL7SncX7UmFI5anR2Axcg%3D"
+localFolder="C:/Users/Mustapha Bouhsen/OneDrive - Habitat/DataPool/geospatial/"
+blobContainer="https://habitatblob.blob.core.windows.net/database/raw/geospatial/aaa/?sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupyx&se=2025-08-31T03:09:17Z&st=2024-08-15T19:09:17Z&spr=https&sig=IIL1q3Se%2BZfKA1l96S%2B8%2FEmL7SncX7UmFI5anR2Axcg%3D"
+blobFilesList="https://habitatblob.blob.core.windows.net/database/files_list_to_process/geospatial/aaa/?sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupyx&se=2025-08-31T03:09:17Z&st=2024-08-15T19:09:17Z&spr=https&sig=IIL1q3Se%2BZfKA1l96S%2B8%2FEmL7SncX7UmFI5anR2Axcg%3D"
 filesList="files_list.csv"
 
 
@@ -13,17 +13,14 @@ C:/ProgramData/miniconda3/python.exe ./main.py
 # Move all files to Blob Storage
 ./azcopy copy "$localFolder/*" "$blobContainer" --recursive 
 
-# # Verify files have been moved
-# $blobFiles = azcopy list "blobContainer"
-# $localFiles = Get-ChildItem -Path localFolder
 
 cd "$localFolder"
 rm -f *
 
 
-cd ~/Desktop/data_flow
+cd ~/Desktop/data_flow/geospatial/
 
-csv_file="files_list.csv"
+csv_file="daily_files_list.csv"
 
 raw_count=$(wc -l < "$csv_file")
 
@@ -31,22 +28,3 @@ raw_count=$(wc -l < "$csv_file")
 if [ "$raw_count" -gt 1 ]; then
     ./azcopy copy "$filesList" "$blobFilesList" --recursive
 fi
-
-
-# Check if the number of files in the blob matches the local folder
-# if ($blobFiles.Count -eq localFiles.Count) {
-#     # Delete all files in the local folder
-#     Remove-Item "$localFolder*" -Force
-
-#     # Move another file to Blob Storage
-#     azcopy copy "$anotherFile" "$blobContainer"
-# } else {
-#     Write-Host "Mismatch in file count. Files not deleted."
-# }
-
-
-
-
-# ./azcopy copy "files/*" "https://habitatblob.blob.core.windows.net/database/raw_test/?sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupyx&se=2025-08-31T03:09:17Z&st=2024-08-15T19:09:17Z&spr=https&sig=IIL1q3Se%2BZfKA1l96S%2B8%2FEmL7SncX7UmFI5anR2Axcg%3D"  --recursive
-
-
