@@ -2,6 +2,7 @@
 
 import os
 import pandas as pd
+import requests
 
 root_folder_path = 'C:\\Users\\Mustapha Bouhsen\\OneDrive - Habitat\\DataPool\\geospatial\\'
 
@@ -16,4 +17,4 @@ for file in os.listdir(root_folder_path):
 
 df_files = pd.DataFrame({"files_name" : files_name_list})
 
-df_files.to_csv("daily_files_list", index=False)
+df_files.to_csv("daily_files_list.csv", index=False)
